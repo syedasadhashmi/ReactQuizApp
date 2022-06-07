@@ -17,6 +17,17 @@ function App() {
   useEffect(() => {
     fetchData();
   }, []);
+  const options = () => {
+    let arr = [];
+    quizData.map((x) => {
+      arr.push(x.correct_answer);
+      x.incorrect_answers.map((ans) => {
+        arr.push(ans);
+      });
+    });
+    console.log(arr);
+  };
+  options();
   return (
     <div>
       {quizData.map((x) => (
