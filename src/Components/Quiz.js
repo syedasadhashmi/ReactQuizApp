@@ -28,11 +28,21 @@ const Quiz = (props) => {
       {
         <div>
           <p>{props.questions[newQuestion].question}</p>
-          <ul>
+          <ul className="list-style">
             {props.questions[newQuestion].incorrect_answers.map((ans) => (
-              <li>{ans}</li>
+              <li>
+                <label>
+                  <input type="radio" name={newQuestion}></input>
+                  {ans}
+                </label>
+              </li>
             ))}
-            <li>{props.questions[newQuestion].correct_answer}</li>
+            <li>
+              <label>
+                <input type="radio" name={newQuestion}></input>
+                {props.questions[newQuestion].correct_answer}
+              </label>
+            </li>
           </ul>
         </div>
       }
