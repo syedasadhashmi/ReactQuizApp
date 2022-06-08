@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Quiz from "./Components/Quiz";
 import "./App.css";
 
 function App() {
   const [quizData, setQuizData] = useState([]);
+  const [isQuizStart, setIsQuizStart] = useState(false);
   const fetchData = () => {
     fetch("https://opentdb.com/api.php?amount=10")
       .then((response) => {
@@ -11,36 +13,24 @@ function App() {
       .then((data) => {
         let arr = data.results;
         setQuizData(arr);
-        console.log(arr);
+        // console.log(arr);
       });
   };
   useEffect(() => {
     fetchData();
   }, []);
-  const options = () => {
-    let arr = [];
-    quizData.map((x) => {
-      arr.push(x.correct_answer);
-      x.incorrect_answers.map((ans) => {
-        arr.push(ans);
-      });
-    });
-    console.log(arr);
+
+  const clickHandler = () => {
+    setIsQuizStart(true);
   };
-  options();
   return (
-    <div>
-      {quizData.map((x) => (
-        <div>
-          <p>{x.question}</p>
-          <ul>
-            {x.incorrect_answers.map((ans) => (
-              <li>{ans}</li>
-            ))}
-            <li>{x.correct_answer}</li>
-          </ul>
-        </div>
-      ))}
+    <div className="flex-div">
+      {!isQuizStart && (
+        <button className="start-btn" onClick={clickHandler}>
+          Start Quiz
+        </button>
+      )}
+      {isQuizStart && <Quiz questions={quizData} />}
     </div>
   );
 }
