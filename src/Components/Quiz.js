@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-// import App from "../App";
+import React, { useEffect, useState } from "react";
 import "./Quiz.css";
 import Result from "./Result";
 
@@ -9,12 +8,11 @@ const Quiz = (props) => {
   const [isCheckAnswer, setIsCheckAnswer] = useState(false);
   const [score, setScore] = useState(0);
   const [isFinish, setIsFinish] = useState(false);
-  // const [answer, setAnswer] = useState([]);
+  const [answer, setAnswer] = useState([]);
   const [count, setCount] = useState(1);
   // const finishHandler = () => {
   //   setIsResult(true);
   // };
-
   // console.log(props.questions.length);
   const changeHandler = () => {
     let quantity = newQuestion + 1;
@@ -30,7 +28,7 @@ const Quiz = (props) => {
       let i = score + 1;
       setScore(i);
     }
-    console.log(score);
+    // console.log(score);
   };
   // const submitHandler = (e) => {
   //   e.preventDefault();
@@ -39,8 +37,40 @@ const Quiz = (props) => {
   //   // console.log(label.innerText);
   //   // console.log(input.value);
   //   console.log(isCheckAnswer);
-
   // };
+  // const shuffle = (arr) => {
+  //   for (let i = 0; i <= arr.lenngth - 1; i++) {
+  //     let index = Math.random() * arr.length;
+  //     let temp = arr[i];
+  //     arr[i] = arr[index];
+  //     arr[index] = temp;
+  //   }
+  //   return setAnswer(arr);
+  //   // console.log(arr);
+  // };
+
+  useEffect(() => {
+    let arr = [];
+    props.questions[newQuestion].incorrect_answers.map((items) =>
+      arr.push(items)
+    );
+    arr.push(props.questions[newQuestion].correct_answer);
+    // console.log(arr);
+    // for (let i = 0; i <= arr.length - 1; i++) {
+    //   let index = Math.random() * arr.length;
+    //   let temp = arr[i];
+    //   arr[i] = arr[index];
+    //   arr[index] = temp;
+    // }
+    setAnswer(arr);
+    // console.log(arr);
+    // console.log(shuffle(arr));
+    return () => {
+      arr = [];
+    };
+  }, [props.questions, newQuestion]);
+  // console.log(answer);
+  // console.log(arr[Math.floor(Math.random() * arr.length)]);
   const changeLabelHandler = (e) => {
     let choosenAnswer = e.target.value;
     if (props.questions[newQuestion].correct_answer === choosenAnswer) {
@@ -59,7 +89,8 @@ const Quiz = (props) => {
           <h4>Question# {count}</h4>
           <p>{props.questions[newQuestion].question}</p>
           <ul className="list-style">
-            {props.questions[newQuestion].incorrect_answers.map((ans, i) => (
+            {/* {props.questions[newQuestion].incorrect_answers.map((ans, i) => ( */}
+            {answer.map((ans, i) => (
               <li key={i}>
                 <label onChange={changeLabelHandler}>
                   <input type="radio" name={newQuestion} value={ans} />
@@ -67,7 +98,7 @@ const Quiz = (props) => {
                 </label>
               </li>
             ))}
-            <li>
+            {/* <li>
               <label onChange={changeLabelHandler}>
                 <input
                   type="radio"
@@ -76,7 +107,7 @@ const Quiz = (props) => {
                 />
                 {props.questions[newQuestion].correct_answer}
               </label>
-            </li>
+            </li> */}
           </ul>
         </div>
       )}
