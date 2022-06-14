@@ -5,6 +5,8 @@ import "./App.css";
 function App() {
   const [quizData, setQuizData] = useState([]);
   const [isQuizStart, setIsQuizStart] = useState(false);
+  // const [minutes, setMinutes] = useState(0);
+
   const fetchData = () => {
     fetch("https://opentdb.com/api.php?amount=10")
       .then((response) => {
@@ -13,7 +15,6 @@ function App() {
       .then((data) => {
         let arr = data.results;
         setQuizData(arr);
-        // console.log(arr);
       });
   };
   useEffect(() => {
@@ -22,7 +23,13 @@ function App() {
 
   const clickHandler = () => {
     setIsQuizStart(true);
+    // let time = 0;
+    // setInterval(() => {
+    //   time = minutes + 1;
+    //   setMinutes(time);
+    // }, 1000);
   };
+
   return (
     <div className="flex-div">
       {!isQuizStart && (
@@ -34,5 +41,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

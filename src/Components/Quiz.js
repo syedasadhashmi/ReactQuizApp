@@ -48,7 +48,18 @@ const Quiz = (props) => {
   //   return setAnswer(arr);
   //   // console.log(arr);
   // };
-
+  // console.log(props.time);
+  // const shuffle = (arr) => {
+  //   for (let i = 0; i <= arr.length - 1; i++) {
+  //     let index = Math.random() * arr.length;
+  //     let temp = arr[i];
+  //     arr[i] = arr[index];
+  //     arr[index] = temp;
+  //   }
+  //   setAnswer(arr);
+  //   return arr;
+  //   //
+  // };
   useEffect(() => {
     let arr = [];
     props.questions[newQuestion].incorrect_answers.map((items) =>
@@ -56,23 +67,31 @@ const Quiz = (props) => {
     );
     arr.push(props.questions[newQuestion].correct_answer);
     // console.log(arr);
-    // for (let i = 0; i <= arr.length - 1; i++) {
-    //   let index = Math.random() * arr.length;
-    //   let temp = arr[i];
-    //   arr[i] = arr[index];
-    //   arr[index] = temp;
-    // }
+    //
     setAnswer(arr);
+    // console.log("first");
     // console.log(arr);
     // console.log(shuffle(arr));
-    return () => {
-      arr = [];
-    };
+    // return () => {
+    //   arr = [];
+    // };
   }, [props.questions, newQuestion]);
+  // useEffect(() => {
+  //   // console.log("seconnd");
+  //   // console.log(shuffle(answer));
+  //   for (let i = 0; i <= answer.length - 1; i++) {
+  //     let index = Math.random() * answer.length;
+  //     let temp = answer[i];
+  //     answer[i] = answer[index];
+  //     answer[index] = temp;
+  //   }
+  //   setAnswer(answer);
+  // }, [answer]);
   // console.log(answer);
   // console.log(arr[Math.floor(Math.random() * arr.length)]);
   const changeLabelHandler = (e) => {
     let choosenAnswer = e.target.value;
+
     if (props.questions[newQuestion].correct_answer === choosenAnswer) {
       setIsCheckAnswer(true);
     } else {
@@ -81,6 +100,9 @@ const Quiz = (props) => {
   };
   const checkOverallScore = () => {
     setIsFinish(true);
+    clearInterval(props.time);
+    console.log(props.pop);
+    // console.log(props.sec);
   };
   return (
     <div className="center-div">
