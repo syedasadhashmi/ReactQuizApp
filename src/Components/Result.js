@@ -1,5 +1,6 @@
 import { useState } from "react";
 import App from "../App";
+import "./Result.css";
 
 const Result = (props) => {
   const [isShow, setIsShow] = useState(false);
@@ -7,7 +8,7 @@ const Result = (props) => {
     setIsShow(true);
   };
   return (
-    <div>
+    <div className="centrDiv">
       {!isShow && (
         <>
           <h4>
