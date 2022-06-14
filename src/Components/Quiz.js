@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+// import App from "../App";
 import "./Quiz.css";
+import Result from "./Result";
 
 const Quiz = (props) => {
   const [newQuestion, setNewQuestion] = useState(0);
   const [isResult, setIsResult] = useState(false);
   const [isCheckAnswer, setIsCheckAnswer] = useState(false);
   const [score, setScore] = useState(0);
+  const [isFinish, setIsFinish] = useState(false);
   // const [answer, setAnswer] = useState([]);
   const [count, setCount] = useState(1);
   // const finishHandler = () => {
@@ -23,21 +26,21 @@ const Quiz = (props) => {
     } else {
       setIsResult(true);
     }
-  };
-  const submitHandler = (e) => {
-    e.preventDefault();
-    // const input = e.target.querySelector("input[type=radio]:checked");
-    // const label = e.target.querySelector("label");
-    // console.log(label.innerText);
-    // console.log(input.value);
-    console.log(isCheckAnswer);
-
     if (isCheckAnswer) {
       let i = score + 1;
       setScore(i);
     }
     console.log(score);
   };
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   // const input = e.target.querySelector("input[type=radio]:checked");
+  //   // const label = e.target.querySelector("label");
+  //   // console.log(label.innerText);
+  //   // console.log(input.value);
+  //   console.log(isCheckAnswer);
+
+  // };
   const changeLabelHandler = (e) => {
     let choosenAnswer = e.target.value;
     if (props.questions[newQuestion].correct_answer === choosenAnswer) {
@@ -46,8 +49,11 @@ const Quiz = (props) => {
       setIsCheckAnswer(false);
     }
   };
+  const checkOverallScore = () => {
+    setIsFinish(true);
+  };
   return (
-    <form onSubmit={submitHandler} className="center-div">
+    <div className="center-div">
       <h4>Question# {count}</h4>
       {
         <div>
@@ -86,11 +92,12 @@ const Quiz = (props) => {
         Finish
       </button> */}
       {isResult && (
-        <button type="button" onClick={changeHandler}>
+        <button type="button" onClick={checkOverallScore}>
           Finish
         </button>
       )}
-    </form>
+      {isFinish && <Result answer={score} />}
+    </div>
   );
 };
 export default Quiz;

@@ -1,4 +1,4 @@
-const Result = () => {
-  return <div>Result</div>;
+const Result = (props) => {
+  return <div>{props.answer}</div>;
 };
 export default Result;
