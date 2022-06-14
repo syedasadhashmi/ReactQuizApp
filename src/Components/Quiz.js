@@ -54,9 +54,9 @@ const Quiz = (props) => {
   };
   return (
     <div className="center-div">
-      <h4>Question# {count}</h4>
-      {
+      {!isFinish && (
         <div>
+          <h4>Question# {count}</h4>
           <p>{props.questions[newQuestion].question}</p>
           <ul className="list-style">
             {props.questions[newQuestion].incorrect_answers.map((ans, i) => (
@@ -79,7 +79,7 @@ const Quiz = (props) => {
             </li>
           </ul>
         </div>
-      }
+      )}
       {!isResult && (
         <button onClick={changeHandler} type="submit">
           Next
@@ -91,12 +91,12 @@ const Quiz = (props) => {
       <button type="button" onClick={changeHandler}>
         Finish
       </button> */}
-      {isResult && (
+      {isResult && !isFinish && (
         <button type="button" onClick={checkOverallScore}>
           Finish
         </button>
       )}
-      {isFinish && <Result answer={score} />}
+      {isFinish && <Result answer={score} count={count} />}
     </div>
   );
 };
