@@ -45,23 +45,10 @@ function App() {
   const clickHandler = () => {
     setIsQuizStart(true);
     restart();
-    // timer = setInterval(() => {
-    //   setSeconds(seconds + 1);
-    //   if (seconds === 59) {
-    //     setMinutes(minutes + 1);
-    //     setSeconds(0);
-    //   }
-    // }, 1000);
   };
-
+  // console.log("b");
   return (
     <div className="flex-div">
-      {/* <h1>
-        {minutes < 10 ? "0" + minutes : minutes}:
-        {seconds < 10 ? "0" + seconds : seconds}
-      </h1>
-      <button onClick={restart}>Start</button>
-      <button onClick={stop}>Stop</button> */}
       {!isQuizStart && (
         <button className="start-btn" onClick={clickHandler}>
           Start Quiz
