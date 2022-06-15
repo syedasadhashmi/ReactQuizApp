@@ -10,11 +10,12 @@ const Quiz = (props) => {
   const [isFinish, setIsFinish] = useState(false);
   const [answer, setAnswer] = useState([]);
   const [count, setCount] = useState(1);
+  const [isChecked, setIsChecked] = useState(false);
 
   const changeHandler = () => {
     let quantity = newQuestion + 1;
     let temp = count + 1;
-
+    setIsChecked(false);
     if (quantity <= props.questions.length - 1) {
       setNewQuestion(quantity);
       setCount(temp);
@@ -40,7 +41,24 @@ const Quiz = (props) => {
     }
     return setAnswer(array);
   }
+  // function toggleOption(i, checked) {
+  //   return answer.map((option) =>
+  //     option.i === i ? { ...option, checked } : option
+  //   );
+  // }
 
+  // const changeList = (i, checked) => {
+  //   const newCheckedList = toggleOption(i, checked);
+  //   console.log(newCheckedList);
+  //   setAnswer(newCheckedList);
+  // };
+  function randomSelect(arr) {
+    const arrObj = arr.map((items, i) => ({ name: items, id: i }));
+    // setAnswer(arr1);
+    console.log(arrObj);
+    // return arr1;
+    shuffle(arrObj);
+  }
   useEffect(() => {
     let arr = [];
     props.questions[newQuestion].incorrect_answers.map((items) =>
@@ -48,7 +66,8 @@ const Quiz = (props) => {
     );
     arr.push(props.questions[newQuestion].correct_answer);
     console.log(props.questions[newQuestion].correct_answer);
-    shuffle(arr);
+    randomSelect(arr);
+    // shuffle(arr);
   }, [props.questions, newQuestion]);
 
   const changeLabelHandler = (e) => {
@@ -60,12 +79,15 @@ const Quiz = (props) => {
       setIsCheckAnswer(false);
     }
   };
+  // const radioChange = (e) => {
+
+  // };
 
   const checkOverallScore = () => {
     setIsFinish(true);
     props.stop();
   };
-
+  console.log(answer, "ans");
   return (
     <div className="center-div">
       {!isFinish && (
@@ -73,17 +95,24 @@ const Quiz = (props) => {
           <h4>Question# {count}</h4>
           <p>{props.questions[newQuestion].question}</p>
           <ul className="list-style">
-            {answer.map((ans, i) => (
-              <li key={i}>
+            {answer.map(({ name, id, checked }) => (
+              <li key={id}>
                 <label onChange={changeLabelHandler}>
-                  <input type="radio" name={newQuestion} value={ans} />
-                  {ans}
+                  <input
+                    type="radio"
+                    name={newQuestion}
+                    value={name}
+                    // checked={isChecked}
+                    onChange={() => setIsChecked(!isChecked)}
+                  />
+                  {name}
                 </label>
               </li>
             ))}
           </ul>
         </div>
       )}
+
       {!isResult && (
         <button onClick={changeHandler} type="submit">
           Next
@@ -95,6 +124,7 @@ const Quiz = (props) => {
           Finish
         </button>
       )}
+
       {isFinish && (
         <Result
           answer={score}

@@ -21,6 +21,7 @@ function App() {
   useEffect(() => {
     fetchData();
   }, []);
+
   var timer;
   useEffect(() => {
     timer = setInterval(() => {
@@ -33,7 +34,7 @@ function App() {
     return () => {
       clearInterval(timer);
     };
-  });
+  }, []);
 
   const restart = () => {
     setMinutes(0);
@@ -46,7 +47,8 @@ function App() {
     setIsQuizStart(true);
     restart();
   };
-  // console.log("b");
+  console.log(minutes);
+  console.log(seconds);
   return (
     <div className="flex-div">
       {!isQuizStart && (
