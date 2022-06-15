@@ -41,17 +41,17 @@ const Quiz = (props) => {
     }
     return setAnswer(array);
   }
-  // function toggleOption(i, checked) {
-  //   return answer.map((option) =>
-  //     option.i === i ? { ...option, checked } : option
-  //   );
-  // }
+  function toggleOption(id, checked) {
+    return answer.map((option) =>
+      option.id === id ? { ...option, checked } : option
+    );
+  }
 
-  // const changeList = (i, checked) => {
-  //   const newCheckedList = toggleOption(i, checked);
-  //   console.log(newCheckedList);
-  //   setAnswer(newCheckedList);
-  // };
+  const changeList = (id, checked) => {
+    const newCheckedList = toggleOption(id, checked);
+    console.log(newCheckedList);
+    setAnswer(newCheckedList);
+  };
   function randomSelect(arr) {
     const arrObj = arr.map((items, i) => ({ name: items, id: i }));
     // setAnswer(arr1);
@@ -102,8 +102,8 @@ const Quiz = (props) => {
                     type="radio"
                     name={newQuestion}
                     value={name}
-                    // checked={isChecked}
-                    onChange={() => setIsChecked(!isChecked)}
+                    checked={checked}
+                    onChange={(e) => changeList(id, e.target.checked)}
                   />
                   {name}
                 </label>
