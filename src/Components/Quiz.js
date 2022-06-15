@@ -100,8 +100,9 @@ const Quiz = (props) => {
   };
   const checkOverallScore = () => {
     setIsFinish(true);
-    clearInterval(props.time);
-    console.log(props.pop);
+    props.stop();
+    // clearInterval(props.time);
+    // console.log(props.pop);
     // console.log(props.sec);
   };
   return (
@@ -149,7 +150,14 @@ const Quiz = (props) => {
           Finish
         </button>
       )}
-      {isFinish && <Result answer={score} count={count} />}
+      {isFinish && (
+        <Result
+          answer={score}
+          count={count}
+          minutes={props.minutes}
+          seconds={props.seconds}
+        />
+      )}
     </div>
   );
 };

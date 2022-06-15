@@ -14,6 +14,9 @@ const Result = (props) => {
           <h4>
             Your Score is {props.answer} out Of {props.count}
           </h4>
+          <h5>
+            Time Taken To Finish: {props.minutes}:{props.seconds}
+          </h5>
           <button onClick={changeStateHandler}>Play Again</button>
         </>
       )}
