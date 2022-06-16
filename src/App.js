@@ -24,7 +24,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    var timer;
+    let timer;
     if (status) {
       timer = setInterval(() => {
         setSeconds(seconds + 1);
@@ -78,18 +78,19 @@ function App() {
           <button onClick={stop}>Stop</button>
         </h5>
       } */}
-      {!isQuizStart && (
+      {!isQuizStart ? (
         <button className="start-btn" onClick={clickHandler}>
           Start Quiz
         </button>
-      )}
-      {isQuizStart && (
-        <Quiz
-          questions={quizData}
-          stop={stop}
-          minutes={minutes}
-          seconds={seconds}
-        />
+      ) : (
+        isQuizStart && (
+          <Quiz
+            questions={quizData}
+            stop={stop}
+            minutes={minutes}
+            seconds={seconds}
+          />
+        )
       )}
     </div>
   );

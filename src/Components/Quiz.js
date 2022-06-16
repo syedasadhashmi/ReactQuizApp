@@ -82,7 +82,7 @@ const Quiz = (props) => {
   }, [props.questions, newQuestion]);
 
   const changeLabelHandler = (e) => {
-    let choosenAnswer = e.target.value;
+    const choosenAnswer = e.target.value;
 
     if (props.questions[newQuestion].correct_answer === choosenAnswer) {
       setIsCheckAnswer(true);
