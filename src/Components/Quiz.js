@@ -10,12 +10,12 @@ const Quiz = (props) => {
   const [isFinish, setIsFinish] = useState(false);
   const [answer, setAnswer] = useState([]);
   const [count, setCount] = useState(1);
-  const [isChecked, setIsChecked] = useState(false);
+  // const [isChecked, setIsChecked] = useState(false);
 
   const changeHandler = () => {
     let quantity = newQuestion + 1;
     let temp = count + 1;
-    setIsChecked(false);
+
     if (quantity <= props.questions.length - 1) {
       setNewQuestion(quantity);
       setCount(temp);
@@ -49,13 +49,16 @@ const Quiz = (props) => {
 
   const changeList = (id, checked) => {
     const newCheckedList = toggleOption(id, checked);
-    console.log(newCheckedList);
+    // console.log(newCheckedList);
     setAnswer(newCheckedList);
   };
   function randomSelect(arr) {
-    const arrObj = arr.map((items, i) => ({ name: items, id: i }));
+    const arrObj = arr.map((items, i) => ({
+      name: items,
+      id: i + 1,
+    }));
     // setAnswer(arr1);
-    console.log(arrObj);
+    // console.log(arrObj);
     // return arr1;
     shuffle(arrObj);
   }
@@ -87,7 +90,7 @@ const Quiz = (props) => {
     setIsFinish(true);
     props.stop();
   };
-  console.log(answer, "ans");
+  // console.log(answer, "ans");
   return (
     <div className="center-div">
       {!isFinish && (
