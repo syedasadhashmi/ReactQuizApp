@@ -23,8 +23,8 @@ function App() {
     fetchData();
   }, []);
 
-  var timer;
   useEffect(() => {
+    var timer;
     if (status) {
       timer = setInterval(() => {
         setSeconds(seconds + 1);
@@ -33,6 +33,8 @@ function App() {
           setSeconds(0);
         }
       }, 1000);
+    } else {
+      clearInterval(timer);
     }
 
     return () => {
@@ -48,7 +50,7 @@ function App() {
   const stop = () => {
     // changeStatus(false);
     setStatus(false);
-    clearInterval(timer);
+    // clearInterval(timer);
   };
   // const startTimer = () => {
   //   timer = setInterval(() => {

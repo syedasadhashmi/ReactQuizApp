@@ -52,7 +52,24 @@ const Quiz = (props) => {
     // console.log(newCheckedList);
     setAnswer(newCheckedList);
   };
-  function randomSelect(arr) {
+  // function randomSelect(arr) {
+  //   const arrObj = arr.map((items, i) => ({
+  //     name: items,
+  //     id: i + 1,
+  //   }));
+  //   // setAnswer(arr1);
+  //   // console.log(arrObj);
+  //   // return arr1;
+  //   shuffle(arrObj);
+  // }
+  useEffect(() => {
+    let arr = [];
+    props.questions[newQuestion].incorrect_answers.map((items) =>
+      arr.push(items)
+    );
+    arr.push(props.questions[newQuestion].correct_answer);
+    console.log(props.questions[newQuestion].correct_answer);
+    // randomSelect(arr);
     const arrObj = arr.map((items, i) => ({
       name: items,
       id: i + 1,
@@ -61,15 +78,6 @@ const Quiz = (props) => {
     // console.log(arrObj);
     // return arr1;
     shuffle(arrObj);
-  }
-  useEffect(() => {
-    let arr = [];
-    props.questions[newQuestion].incorrect_answers.map((items) =>
-      arr.push(items)
-    );
-    arr.push(props.questions[newQuestion].correct_answer);
-    // console.log(props.questions[newQuestion].correct_answer);
-    randomSelect(arr);
     // shuffle(arr);
   }, [props.questions, newQuestion]);
 
