@@ -67,7 +67,7 @@ function App() {
     // startTimer();
     restart();
   };
-
+  // console.log("a");
   return (
     <div className="flex-div">
       {/* {

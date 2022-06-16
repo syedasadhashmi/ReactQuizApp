@@ -68,7 +68,7 @@ const Quiz = (props) => {
       arr.push(items)
     );
     arr.push(props.questions[newQuestion].correct_answer);
-    console.log(props.questions[newQuestion].correct_answer);
+    // console.log(props.questions[newQuestion].correct_answer);
     randomSelect(arr);
     // shuffle(arr);
   }, [props.questions, newQuestion]);
