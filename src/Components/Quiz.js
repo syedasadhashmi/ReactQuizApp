@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Quiz.css";
 import Result from "./Result";
+// import App from "..//App";
 
 const Quiz = (props) => {
   const [newQuestion, setNewQuestion] = useState(0);
@@ -13,8 +14,8 @@ const Quiz = (props) => {
   // const [isChecked, setIsChecked] = useState(false);
 
   const changeHandler = () => {
-    let quantity = newQuestion + 1;
-    let temp = count + 1;
+    const quantity = newQuestion + 1;
+    const temp = count + 1;
 
     if (quantity <= props.questions.length - 1) {
       setNewQuestion(quantity);
@@ -23,7 +24,7 @@ const Quiz = (props) => {
       setIsResult(true);
     }
     if (isCheckAnswer) {
-      let i = score + 1;
+      const i = score + 1;
       setScore(i);
     }
   };
@@ -52,18 +53,10 @@ const Quiz = (props) => {
     // console.log(newCheckedList);
     setAnswer(newCheckedList);
   };
-  // function randomSelect(arr) {
-  //   const arrObj = arr.map((items, i) => ({
-  //     name: items,
-  //     id: i + 1,
-  //   }));
-  //   // setAnswer(arr1);
-  //   // console.log(arrObj);
-  //   // return arr1;
-  //   shuffle(arrObj);
+
   // }
   useEffect(() => {
-    let arr = [];
+    const arr = [];
     props.questions[newQuestion].incorrect_answers.map((items) =>
       arr.push(items)
     );
@@ -74,11 +67,8 @@ const Quiz = (props) => {
       name: items,
       id: i + 1,
     }));
-    // setAnswer(arr1);
-    // console.log(arrObj);
-    // return arr1;
+
     shuffle(arrObj);
-    // shuffle(arr);
   }, [props.questions, newQuestion]);
 
   const changeLabelHandler = (e) => {
@@ -90,15 +80,12 @@ const Quiz = (props) => {
       setIsCheckAnswer(false);
     }
   };
-  // const radioChange = (e) => {
-
-  // };
 
   const checkOverallScore = () => {
     setIsFinish(true);
     props.stop();
   };
-  // console.log(answer, "ans");
+
   return (
     <div className="center-div">
       {!isFinish && (
@@ -137,6 +124,13 @@ const Quiz = (props) => {
       )}
 
       {isFinish && (
+        // <App
+        //   answer={score}
+        //   count={count}
+        //   minutes={props.minutes}
+        //   seconds={props.seconds}
+        // />
+
         <Result
           answer={score}
           count={count}

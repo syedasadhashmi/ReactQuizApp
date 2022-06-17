@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Quiz from "./Components/Quiz";
 import "./App.css";
 
-function App() {
+function App(props) {
   const [quizData, setQuizData] = useState([]);
   const [isQuizStart, setIsQuizStart] = useState(false);
   const [minutes, setMinutes] = useState(0);
@@ -42,34 +42,20 @@ function App() {
     };
   }, [minutes, seconds, status]);
 
-  // console.log("a");
   const restart = () => {
     setMinutes(0);
     setSeconds(0);
   };
   const stop = () => {
-    // changeStatus(false);
     setStatus(false);
-    // clearInterval(timer);
   };
-  // const startTimer = () => {
-  //   timer = setInterval(() => {
-  //     setSeconds((seconds) => seconds + 1);
-  //   }, 1000);
-  // };
-  // const changeStatus = (e) => {
-  //   console.log(e);
-  //   return setStatus(e);
-  // };
+
   const clickHandler = () => {
-    // changeStatus(true);
-    // console.log(status);
     setStatus(true);
     setIsQuizStart(true);
-    // startTimer();
     restart();
   };
-  // console.log("a");
+
   return (
     <div className="flex-div">
       {/* {
